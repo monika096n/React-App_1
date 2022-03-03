@@ -1,22 +1,17 @@
-require('dotenv').config()
-
 const express = require('express');
-const app = express();
-const cookieParser = require('cookie-parser')
+const app = express();//server create
+const cookieParser = require('cookie-parser')//session-maintanence
 const config=require('./allConfig')
 // Google Auth
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID=config.CLIENT_ID;
 const client = new OAuth2Client(CLIENT_ID);
-
 const PORT = config.PORT;
-
 // Middleware
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); //views->ejs
 app.use(express.json()); 
 app.use(cookieParser()); //for setting cookie and removing
-app.use(express.static('public'));
 
 app.get('/', (req, res)=>{
     res.render('index') //renders a file
@@ -34,10 +29,11 @@ app.post('/login', (req,res)=>{
             idToken: token,
             audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
         });
-        const payload = ticket.getPayload();
+        const payload = ticket.getPayload();//email,name..etc
+        console.log('payload',payload);
         const userid = payload['sub']; //email
       }
-      verify()
+      verify() 
       .then(()=>{
           res.cookie('session-token', token); //setting cookie in users browser
           res.send('success')
