@@ -8,7 +8,7 @@ const CLIENT_ID=config.CLIENT_ID;
 const client = new OAuth2Client(CLIENT_ID);
 const PORT = config.PORT;
 // Middleware
-
+console.log(CLIENT_ID)
 app.set('view engine', 'ejs'); //views->ejs
 app.use(express.json()); 
 app.use(cookieParser()); //for setting cookie and removing
