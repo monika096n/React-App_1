@@ -21,6 +21,7 @@
   "homepage": "https://github.com/monika096n/React-App_1#readme",
   "dependencies": {
     "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",

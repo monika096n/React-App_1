@@ -7,8 +7,13 @@ const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID=config.CLIENT_ID;
 const client = new OAuth2Client(CLIENT_ID);
 const PORT = config.PORT;
+
+//Encryption - Decryption
+const bcrypt=require('bcrypt')
+//Mongo
+const { MongoClient } = require('mongodb');
+
 // Middleware
-console.log(CLIENT_ID)
 app.set('view engine', 'ejs'); //views->ejs
 app.use(express.json()); 
 app.use(cookieParser()); //for setting cookie and removing
@@ -23,7 +28,6 @@ app.get('/login', (req,res)=>{
 
 app.post('/login', (req,res)=>{
     let token = req.body.token;
-
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -83,7 +87,36 @@ function checkAuthenticated(req, res, next){
       })
 
 }
-
+let db;
+MongoClient.connect(config.connectionString).then(val => {
+db=val.db('React_app')
+app.post('/signUp', (req,res)=>{
+    let username = req.body.username;
+    let password = req.body.password;
+    let passwordHash = bcrypt.hashSync(password, 10);
+    db.collection('user_details').insertOne({ username: username,password:passwordHash }, function (
+        err,
+        info
+      ) {
+        res.json(info)
+    })
+})
+app.post('/login-with-password', (req,res)=>{
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(password)
+    
+    db.collection('user_details')
+      .findOne({ username: username},function(err, result) {
+        if (err) throw err;
+        let resultPassword = result.password;
+        let verified = bcrypt.compareSync(password, resultPassword);
+        res.json({status:verified})
+    })
+})
+}).catch(err=>{ 
+    console.log(err)
+  })
 
 app.listen(PORT, ()=>{
     console.log(`Server running on port ${PORT}`);
