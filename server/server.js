@@ -104,8 +104,6 @@ app.post('/signUp', (req,res)=>{
 app.post('/login-with-password', (req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
-    console.log(password)
-    
     db.collection('user_details')
       .findOne({ username: username},function(err, result) {
         if (err) throw err;
