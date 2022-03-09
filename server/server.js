@@ -95,7 +95,6 @@ function checkAuthenticated(req, res, next){
 let db;
 MongoClient.connect(config.connectionString).then(val => {
 db=val.db('React_app')
-console.log('db',db)
 let findUser=(username)=>{
   return new Promise((resolve,reject)=>{
     db.collection('user_details')
@@ -113,23 +112,29 @@ let findUser=(username)=>{
 app.post('/signUp', async (req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
+    let fullname=req.body.fullname;
     let passwordHash = bcrypt.hashSync(password, 10);
     let existingUser=await findUser(username);
     console.log('login',existingUser)
-    db.collection('user_details').insertOne({ username: username,password:passwordHash }, function (
-        err,
-        info
-      ) {
-        if (info!=null){     
-            res.json({info})
-        }
-        else{
-            res.json({status:'400',message:"Can't able to  register"})
-        }
-    })
+    if(existingUser==='Not Exist'){
+        db.collection('user_details').insertOne({ username: username,password:passwordHash,fullname:fullname }, function (
+            err,
+            info
+          ) {
+            if (info!=null){     
+                res.json({info})
+            }
+            else{
+                res.json({status:'400',message:"Can't able to register"})
+            }
+        }) 
+    }
+    else{
+        res.json({status:'400',message:"User Already Exist!"})
+    }
+    
 })
 app.post('/login-with-password', (req,res)=>{
-    console.log('req details',req)
     let username = req.body.username;
     let password = req.body.password;
     db.collection('user_details')
@@ -140,7 +145,7 @@ app.post('/login-with-password', (req,res)=>{
             res.json({status:verified})
         }
         else{
-            res.json({status:'400',message:'user not registered'})
+            res.json({status:'400',message:'User not registered'})
         }
         
     })

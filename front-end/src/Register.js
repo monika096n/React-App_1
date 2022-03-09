@@ -11,7 +11,6 @@ export default class Register extends Component {
             password:'',
             fullname:''
         }
-
     }
     handleSigninEvent(){
         if(!this.state.signin)
@@ -37,7 +36,6 @@ export default class Register extends Component {
     handleClick=(e)=>{
         let {signin,signup}=this.state;
         e.preventDefault();
-         
         console.log('submited value',this.state)
         if(signin){
             let details={
