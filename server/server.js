@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();//server create
 const cookieParser = require('cookie-parser')//session-maintanence
+var cors = require('cors')
+
 const config=require('./allConfig')
 // Google Auth
 const {OAuth2Client} = require('google-auth-library');
@@ -12,9 +14,11 @@ const PORT = config.PORT;
 const bcrypt=require('bcrypt')
 //Mongo
 const { MongoClient } = require('mongodb');
+const { reject } = require('bcrypt/promises');
 
 // Middleware
 app.set('view engine', 'ejs'); //views->ejs
+app.use(cors());
 app.use(express.json()); 
 app.use(cookieParser()); //for setting cookie and removing
 
@@ -87,29 +91,58 @@ function checkAuthenticated(req, res, next){
       })
 
 }
+
 let db;
 MongoClient.connect(config.connectionString).then(val => {
 db=val.db('React_app')
-app.post('/signUp', (req,res)=>{
+console.log('db',db)
+let findUser=(username)=>{
+  return new Promise((resolve,reject)=>{
+    db.collection('user_details')
+    .findOne({ username: username},function(err, result) {
+      if (result!=null){
+          resolve('Already exist')
+      }
+      else{
+          resolve('Not Exist')
+      }
+      
+  })
+  })
+}
+app.post('/signUp', async (req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
     let passwordHash = bcrypt.hashSync(password, 10);
+    let existingUser=await findUser(username);
+    console.log('login',existingUser)
     db.collection('user_details').insertOne({ username: username,password:passwordHash }, function (
         err,
         info
       ) {
-        res.json(info)
+        if (info!=null){     
+            res.json({info})
+        }
+        else{
+            res.json({status:'400',message:"Can't able to  register"})
+        }
     })
 })
 app.post('/login-with-password', (req,res)=>{
+    console.log('req details',req)
     let username = req.body.username;
     let password = req.body.password;
     db.collection('user_details')
       .findOne({ username: username},function(err, result) {
-        if (err) throw err;
-        let resultPassword = result.password;
-        let verified = bcrypt.compareSync(password, resultPassword);
-        res.json({status:verified})
+        if (result!=null){
+            let resultPassword = result.password;
+            let verified = bcrypt.compareSync(password, resultPassword);
+            res.json({status:verified})
+        }
+        else{
+            res.json({status:'400',message:'user not registered'})
+        }
+        
     })
 })
 }).catch(err=>{ 
