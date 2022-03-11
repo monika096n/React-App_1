@@ -70,9 +70,11 @@ export default class Register extends Component {
     }
     render() {
         let {text} = this.state;
+        let active_sign_in=text==='Login'?true:false;
         return (
          <div>
             <Container>
+            <div className="border-login-top"></div>
                 <Row>
                     <Col lg={8} sm={0}>
                        <img className="loginImage" src={image} alt='Food Image'></img>
@@ -80,7 +82,7 @@ export default class Register extends Component {
                     <Col lg={4}  sm={12}>
                     <form className="ruler-left">
 
-                             <h3>All About Food</h3>   
+                             <h3 className="all-about-food">All About Food</h3>   
                         <Row>
                             <Col lg={6} sm={6}>
                            <div className="login-signin">

@@ -2,9 +2,16 @@ img{
    height:184%;
    width:100%; 
 }
+.border-login-top{
+    margin: 0;
+    padding-top: 5%;
+    background-color: #2D4263;
+    width: 100%;
+}
 .ruler-left{
     border-left:3px solid green;
     height: 100%;
+    padding-top: 20%;
 }
 .form-box{
     width:30%;
@@ -44,6 +51,14 @@ img{
     margin: 20px;
     box-sizing: border-box;
 
+}
+.all-about-food{
+   font-family: 'Cookie';
+    font-style: normal;
+    font-weight: 400;
+}
+.btn-active{
+    background-color: gray;
 }
 .submit-btn{
     width: 100%;
