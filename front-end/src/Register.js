@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import   './Register.scss';
+import {Container,Row,Col} from 'react-bootstrap';
+import image from './images/junk.png';
 let apiurl='http://localhost:8000'
 
 export default class Register extends Component {
@@ -65,33 +68,52 @@ export default class Register extends Component {
     }
     render() {
         return (
-            <form>
-                <h3 onClick={()=>this.handleSigninEvent()}>Sign In</h3>
-                <h3 onClick = {()=>this.handleSignUpEvent()}>Sign Up</h3>
-                {this.state.signin && !this.state.signup?<div>
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" name='username' value={this.state.username} onChange={this.handleInputValue}/>
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue}/>
-                </div></div>:
-                <div>
-                <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text" className="form-control" placeholder="Enter Full Name"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
-                </div>
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email"  name='username' value={this.state.username} onChange={this.handleInputValue}/>
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
-                </div></div>}
-                <button type="submit" className="btn btn-primary btn-block" onClick = {this.handleClick}>Submit</button>
-            </form>
+         <div>
+            <Container>
+                <Row>
+                    <Col lg={8} sm={0}>
+                       <img className="loginImage" src={image} alt='Food Image'></img>
+                    </Col>
+                    <Col lg={4}  sm={12}>
+                    <form>
+                        <Row>
+                            <Col lg={6} sm={6}>
+                           <div className="login-signin">
+                               <h3 onClick={()=>this.handleSigninEvent()}>Sign In</h3>
+                            </div>
+                            </Col>
+                            <Col lg={6} sm={6}>
+                            <div className="login-signin">
+                            <h3 onClick = {()=>this.handleSignUpEvent()}>Sign Up</h3>
+                            </div>
+                            </Col>
+                        </Row>
+
+                        {this.state.signin && !this.state.signup?<div>
+                        <div className="form-group col-1">
+                            <input type="email" className="form-control input-field" placeholder="Enter email" name='username' value={this.state.username} onChange={this.handleInputValue}/>
+                        </div>
+                        <div className="form-group col-1">
+                            <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue}/>
+                        </div></div>:
+                        <div>
+                        <div className="form-group col-1">
+                            <input type="text" className="form-control input-field" placeholder="Enter Full Name"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
+                        </div>
+                        <div className="form-group col-1">
+                            <input type="email" className="form-control input-field" placeholder="Enter email"  name='username' value={this.state.username} onChange={this.handleInputValue}/>
+                        </div>
+                        <div className="form-group col-1">
+                            <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
+                        </div></div>}
+                        <button type="submit" className="btn btn-primary btn-block" onClick = {this.handleClick}>Submit</button>
+                            </form>
+                    </Col>
+
+                </Row>
+            </Container>
+            </div>
+          
         );
     }
 }
