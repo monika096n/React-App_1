@@ -3,6 +3,7 @@ import axios from "axios";
 import   './Register.scss';
 import {Container,Row,Col} from 'react-bootstrap';
 import image from './images/junk.png';
+import $ from 'jquery';
 let apiurl='http://localhost:8000'
 
 export default class Register extends Component {
@@ -25,18 +26,26 @@ export default class Register extends Component {
             this.setState({ signup: !this.state.signup });
             this.setState({username:'',password:'',fullname:'',text:'Login'})
         }
-        
+
+        $('.signup-tab').removeClass('sign-active')
+        $('.signin-tab').addClass("sign-active");
     }
     handleSignUpEvent(){
+        $('.signin-tab').removeClass('sign-active')
+        $('.signup-tab').addClass("sign-active");
+
         if(!this.state.signup)
         {
             this.setState({ signin: !this.state.signin});
             this.setState({ signup: !this.state.signup });
             this.setState({username:'',password:'',fullname:'',text:'Register' })
         }
+       
+
     }
     handleInputValue=(e)=>{
         this.setState({[e.target.name]:e.target.value})
+       
     }
     handleClick=(e)=>{
         let {signin}=this.state;
@@ -85,12 +94,12 @@ export default class Register extends Component {
                              <h3 className="all-about-food">All About Food</h3>   
                         <Row>
                             <Col lg={6} sm={6}>
-                           <div className="login-signin">
+                           <div className="login-signin signin-tab sign-active">
                                <h3 onClick={()=>this.handleSigninEvent()}>Sign In</h3>
                             </div>
                             </Col>
                             <Col lg={6} sm={6}>
-                            <div className="login-signin">
+                            <div className="login-signin signup-tab">
                             <h3 onClick = {()=>this.handleSignUpEvent()}>Sign Up</h3>
                             </div>
                             </Col>
