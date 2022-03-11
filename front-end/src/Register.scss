@@ -15,6 +15,7 @@
 .ruler-left{
     border-left:3px solid green;
     height: 100%;
+    padding: 10%;
     padding-top: 14%;
 }
 .form-box{
@@ -53,7 +54,7 @@
     border-radius:1.5em;
     border-color: rgba(0, 0, 0, 0.07);;
     padding: 10px;
-    margin: 20px;
+    margin: 10px;
     box-sizing: border-box;
 
 }
@@ -100,11 +101,13 @@ h3{
     margin: 20px;
     background-color:#2D4263;
 }
-.google-sign-in{
+.google-sign-in-btn{
     width: 100%;
-    background-color: #fff;
-    border: 2px solid #2D4263;
     padding: 10px;
+    margin: 20px;
+    background-color: #fff;
+    color: #2D4263;
+    border: 2px solid #2D4263;
     font-family: 'Roboto';
 }
 @media  (max-width: 900px) {

@@ -129,10 +129,11 @@ export default class Register extends Component {
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
                         </div></div>}
                         <button type="submit" className="btn btn-primary btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
+                        <p><span className='or-text'>OR</span></p>
+                       <button className="btn btn-primary btn-block google-sign-in-btn">Sign In With Google</button>
                     </form>
 
-                    <p><span className='or-text'>OR</span></p>
-                    <button className="google-sign-in">Sign In With Google</button>
+                  
                     </div>
 
                     </Col>
