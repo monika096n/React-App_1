@@ -13,24 +13,26 @@ export default class Register extends Component {
             signup:false,
             username:'',
             password:'',
-            fullname:''
+            fullname:'',
+            text:'Login',
+
         }
     }
     handleSigninEvent(){
         if(!this.state.signin)
         {
-            this.setState({ signin: !this.state.signin });
+            this.setState({ signin: !this.state.signin  });
             this.setState({ signup: !this.state.signup });
-            this.setState({username:'',password:'',fullname:''})
+            this.setState({username:'',password:'',fullname:'',text:'Login'})
         }
         
     }
     handleSignUpEvent(){
         if(!this.state.signup)
         {
-            this.setState({ signin: !this.state.signin });
+            this.setState({ signin: !this.state.signin});
             this.setState({ signup: !this.state.signup });
-            this.setState({username:'',password:'',fullname:''})
+            this.setState({username:'',password:'',fullname:'',text:'Register' })
         }
     }
     handleInputValue=(e)=>{
@@ -67,6 +69,7 @@ export default class Register extends Component {
         }
     }
     render() {
+        let {text} = this.state;
         return (
          <div>
             <Container>
@@ -75,7 +78,9 @@ export default class Register extends Component {
                        <img className="loginImage" src={image} alt='Food Image'></img>
                     </Col>
                     <Col lg={4}  sm={12}>
-                    <form>
+                    <form className="ruler-left">
+
+                             <h3>All About Food</h3>   
                         <Row>
                             <Col lg={6} sm={6}>
                            <div className="login-signin">
@@ -88,7 +93,7 @@ export default class Register extends Component {
                             </div>
                             </Col>
                         </Row>
-
+ 
                         {this.state.signin && !this.state.signup?<div>
                         <div className="form-group col-1">
                             <input type="email" className="form-control input-field" placeholder="Enter email" name='username' value={this.state.username} onChange={this.handleInputValue}/>
@@ -106,7 +111,7 @@ export default class Register extends Component {
                         <div className="form-group col-1">
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
                         </div></div>}
-                        <button type="submit" className="btn btn-primary btn-block" onClick = {this.handleClick}>Submit</button>
+                        <button type="submit" className="btn btn-primary btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
                             </form>
                     </Col>
 

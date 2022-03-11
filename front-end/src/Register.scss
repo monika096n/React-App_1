@@ -2,6 +2,10 @@ img{
    height:184%;
    width:100%; 
 }
+.ruler-left{
+    border-left:3px solid green;
+    height: 100%;
+}
 .form-box{
     width:30%;
     height:100%;
@@ -16,7 +20,9 @@ img{
    top: 0%;
 }
 .login-signin{
-    border: 2px solid tomato;
+    border: 2px solid #2D4263;
+    text-align: center;
+    justify-content: center;
 }
 .col-1{
     width:100%;
@@ -31,10 +37,19 @@ img{
     height:10%
 }
 .input-field{
-      
-    border-radius: 0.5px;
+    overflow: hidden;
+    border-radius:1.5em;
+    border-color: rgba(0, 0, 0, 0.07);;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
+    box-sizing: border-box;
+
+}
+.submit-btn{
+    width: 100%;
+    padding: 10px;
+    margin: 20px;
+    background-color:#2D4263;
 }
 @media  (max-width: 900px) {
     .loginImage{
