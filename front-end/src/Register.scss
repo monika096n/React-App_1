@@ -1,5 +1,9 @@
-img{
-   height:184%;
+.container{
+    margin: 0% !important;
+    padding: 0% !important;
+}
+.loginImage{
+   height:85%;
    width:100%; 
 }
 .border-login-top{
@@ -11,7 +15,7 @@ img{
 .ruler-left{
     border-left:3px solid green;
     height: 100%;
-    padding-top: 20%;
+    padding-top: 14%;
 }
 .form-box{
     width:30%;
@@ -43,6 +47,7 @@ img{
     width:100%;
     height:10%
 }
+
 .input-field{
     overflow: hidden;
     border-radius:1.5em;
@@ -53,9 +58,37 @@ img{
 
 }
 .all-about-food{
-   font-family: 'Cookie';
+    color: #2D4263;
+    font-family: 'Cookie', cursive;
     font-style: normal;
     font-weight: 400;
+    font-size: 40px;
+    line-height: 13px;
+    margin-bottom: 9%;
+}
+.food-desc{
+    color: #2D4263;
+    font-family: 'Cookie', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 13px;
+    margin-bottom: 7%;
+}
+.heart-image{
+    position: relative;
+    top: -10px;
+}
+h3{
+   
+    span{    
+        color: #2D4263;
+        line-height: 27px;
+        font-size: 24px;
+        text-decoration: underline;
+        color: #2D4263;
+        text-decoration: underline;
+    }
 }
 .sign-active{
     background-color: lightgray;
@@ -66,6 +99,13 @@ img{
     padding: 10px;
     margin: 20px;
     background-color:#2D4263;
+}
+.google-sign-in{
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #2D4263;
+    padding: 10px;
+    font-family: 'Roboto';
 }
 @media  (max-width: 900px) {
     .loginImage{

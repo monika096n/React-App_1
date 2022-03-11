@@ -3,6 +3,7 @@ import axios from "axios";
 import   './Register.scss';
 import {Container,Row,Col} from 'react-bootstrap';
 import image from './images/junk.png';
+import heartsvg from './images/heart.svg';
 import $ from 'jquery';
 let apiurl='http://localhost:8000'
 
@@ -85,13 +86,18 @@ export default class Register extends Component {
             <Container>
             <div className="border-login-top"></div>
                 <Row>
+
                     <Col lg={8} sm={0}>
                        <img className="loginImage" src={image} alt='Food Image'></img>
                     </Col>
-                    <Col lg={4}  sm={12}>
-                    <form className="ruler-left">
 
-                             <h3 className="all-about-food">All About Food</h3>   
+                    <Col lg={4}  sm={12}>
+                    <div className="ruler-left">
+
+                    <form>
+
+                             <h3 className="all-about-food">All About Food <span> <img className="heart-image" src={heartsvg}></img></span></h3>   
+                             <h3 className="food-desc"><span>Only for Food Lovers</span> - <span>Know Yummy Foods </span> - <span>Review Foods!</span> </h3>
                         <Row>
                             <Col lg={6} sm={6}>
                            <div className="login-signin signin-tab sign-active">
@@ -123,7 +129,12 @@ export default class Register extends Component {
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
                         </div></div>}
                         <button type="submit" className="btn btn-primary btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
-                            </form>
+                    </form>
+
+                    <p><span className='or-text'>OR</span></p>
+                    <button className="google-sign-in">Sign In With Google</button>
+                    </div>
+
                     </Col>
 
                 </Row>
