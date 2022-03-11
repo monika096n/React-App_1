@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 let apiurl='http://localhost:8000'
+
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +19,6 @@ export default class Register extends Component {
             this.setState({ signin: !this.state.signin });
             this.setState({ signup: !this.state.signup });
             this.setState({username:'',password:'',fullname:''})
-
         }
         
     }
@@ -34,7 +34,7 @@ export default class Register extends Component {
         this.setState({[e.target.name]:e.target.value})
     }
     handleClick=(e)=>{
-        let {signin,signup}=this.state;
+        let {signin}=this.state;
         e.preventDefault();
         console.log('submited value',this.state)
         if(signin){
@@ -42,7 +42,8 @@ export default class Register extends Component {
                 username:this.state.username,
                 password:this.state.password
             }
-            axios.post(apiurl+'/login-with-password',details).then((data)=>{
+            axios.post(apiurl+'/login-with-password',details).then((data)=>{   
+                window.location.pathname='/homepage'
                 console.log('Response from backend',data)
             }).catch((e)=>{
                 console.log('Error while posting login data',e)
