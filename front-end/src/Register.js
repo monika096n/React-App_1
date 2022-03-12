@@ -4,8 +4,10 @@ import   './Register.scss';
 import {Container,Row,Col} from 'react-bootstrap';
 import image from './images/junk.png';
 import heartsvg from './images/heart.svg';
+import google_image from './images/google.svg';
 import $ from 'jquery';
-let apiurl='http://localhost:8000'
+import GoogleSignIn from './GoogleSignIn'
+let apiurl='http://localhost:8000';
 
 export default class Register extends Component {
     constructor(props) {
@@ -48,6 +50,7 @@ export default class Register extends Component {
         this.setState({[e.target.name]:e.target.value})
        
     }
+  
     handleClick=(e)=>{
         let {signin}=this.state;
         e.preventDefault();
@@ -87,11 +90,11 @@ export default class Register extends Component {
             <div className="border-login-top"></div>
                 <Row>
 
-                    <Col lg={8} sm={0}>
+                    <Col xl={8} sm={0}>
                        <img className="loginImage" src={image} alt='Food Image'></img>
                     </Col>
 
-                    <Col lg={4}  sm={12}>
+                    <Col xl={4}  sm={12}>
                     <div className="ruler-left">
 
                     <form>
@@ -128,9 +131,10 @@ export default class Register extends Component {
                         <div className="form-group col-1">
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
                         </div></div>}
-                        <button type="submit" className="btn btn-primary btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
+                        <button type="submit" className="btn  btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
                         <p><span className='or-text'>OR</span></p>
-                       <button className="btn btn-primary btn-block google-sign-in-btn">Sign In With Google</button>
+                         <GoogleSignIn/>
+                       <button className="btn  btn-block google-sign-in-btn" onClick = {this.onGoogleSignIn}> <img src={google_image} alt='google-icon' className="google-icon" ></img>Sign In With Google</button>
                     </form>
 
                   

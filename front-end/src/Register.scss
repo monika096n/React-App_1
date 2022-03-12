@@ -6,6 +6,7 @@
    height:85%;
    width:100%; 
 }
+
 .border-login-top{
     margin: 0;
     padding-top: 5%;
@@ -96,20 +97,13 @@ h3{
 }
 
 .submit-btn{
+    color:#fff;
     width: 100%;
     padding: 10px;
     margin: 20px;
     background-color:#2D4263;
 }
-.google-sign-in-btn{
-    width: 100%;
-    padding: 10px;
-    margin: 20px;
-    background-color: #fff;
-    color: #2D4263;
-    border: 2px solid #2D4263;
-    font-family: 'Roboto';
-}
+
 @media  (max-width: 900px) {
     .loginImage{
       display: none;
