@@ -90,11 +90,11 @@ export default class Register extends Component {
             <div className="border-login-top"></div>
                 <Row>
 
-                    <Col xl={8} sm={0}>
+                    <Col md={8} xl={8} sm={0}>
                        <img className="loginImage" src={image} alt='Food Image'></img>
                     </Col>
 
-                    <Col xl={4}  sm={12}>
+                    <Col md={4} xl={4}  sm={12}>
                     <div className="ruler-left">
 
                     <form>
@@ -134,12 +134,8 @@ export default class Register extends Component {
                         <button type="submit" className="btn  btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
                         <p><span className='or-text'>OR</span></p>
                          <GoogleSignIn/>
-                       <button className="btn  btn-block google-sign-in-btn" onClick = {this.onGoogleSignIn}> <img src={google_image} alt='google-icon' className="google-icon" ></img>Sign In With Google</button>
-                    </form>
-
-                  
+                    </form>              
                     </div>
-
                     </Col>
 
                 </Row>

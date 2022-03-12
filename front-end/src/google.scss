@@ -1,15 +1,23 @@
-.g-signin{
-   display: none;
+.google-sign-in-btn{
+   span{
+    color: #2D4263;
+    font-family: 'Roboto';
+    font-size: 16px;
+   }
+   img{
+    height: 31px;
+    width: 40px;
+   }
+   button{
+    background-color: #fff;
+    box-shadow: none !important;
+
+  }
 }
 .google-sign-in-btn{
     width: 100%;
     margin: 20px;
     background-color: #fff;
-    color: #2D4263;
     border: 2px solid #2D4263;
-    font-family: 'Roboto';
-}
-.google-icon{
-    height: 31px;
-    width: 40px;
+
 }
