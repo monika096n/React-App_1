@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import   './Register.scss';
-import {Container,Row,Col} from 'react-bootstrap';
-import image from './images/junk.png';
-import heartsvg from './images/heart.svg';
-import google_image from './images/google.svg';
+import {Row,Col} from 'react-bootstrap';
+import heartsvg from './images/cup.svg';
+import 'animate.css';
 import $ from 'jquery';
 import GoogleSignIn from './GoogleSignIn'
+import Slideshow from "./SlideShow";
 let apiurl='http://localhost:8000';
-
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -85,11 +84,10 @@ export default class Register extends Component {
         let {text} = this.state;
         let active_sign_in=text==='Login'?true:false;
         return (
-         <div style={{'backgroundColor':'#2D4263'}}>
-                <Row>
+                <Row style={{'backgroundColor':'#fff'}}>
 
                     <Col md={8} xl={8} sm={0}>
-                       <img className="loginImage" src={image} alt='Food Image'></img>
+                        <Slideshow/>
                     </Col>
 
                     <Col md={4} xl={4}  sm={12}>
@@ -97,8 +95,8 @@ export default class Register extends Component {
 
                     <form>
 
-                             <h3 className="all-about-food">All About Food <span> <img className="heart-image" src={heartsvg} ></img></span></h3>   
-                             <h3 className="food-desc"><span>Only for Food Lovers</span> - <span>Know Yummy Foods </span> - <span>Review Foods!</span> </h3>
+                             <h3 className="all-about-food animate__animated animate__heartBeat">All About Food <span> <img className="heart-image" src={heartsvg} ></img></span></h3>   
+                             {/* <h3 className="food-des"><span>Only for Food Lovers</span> - <span>Know Yummy Foods </span> - <span>Review Foods!</span> </h3> */}
                         <Row>
                             <ul>
                                 <li className="login-signin signin-tab sign-active nav-item">
@@ -120,14 +118,18 @@ export default class Register extends Component {
                         </div></div>:
                         <div>
                         <div className="form-group col-1">
-                            <input type="text" className="form-control input-field" placeholder="Enter Full Name"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
+                            <input type="text" className="form-control input-field" placeholder="Enter username"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
                         </div>
                         <div className="form-group col-1">
                             <input type="email" className="form-control input-field" placeholder="Enter email"  name='username' value={this.state.username} onChange={this.handleInputValue}/>
                         </div>
                         <div className="form-group col-1">
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
-                        </div></div>}
+                        </div>
+                        <div className="form-group col-1">
+                            <input type="text" className="form-control input-field" placeholder="Enter pincode"  name='pincode'  />
+                        </div>
+                        </div>}
                         <button type="submit" className="btn  btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
                         <p><span className='or-text'>OR</span></p>
                          <GoogleSignIn/>
@@ -136,7 +138,6 @@ export default class Register extends Component {
                     </Col>
 
                 </Row>
-            </div>
           
         );
     }
