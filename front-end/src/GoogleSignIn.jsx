@@ -65,7 +65,7 @@ class GoogleSignIn extends Component {
             <button className="btn  btn-block google-sign-in-btn">
             <GoogleLogin
               clientId={CLIENT_ID}
-              buttonText="Sign In with Google"
+              buttonText="Continue with Google"
               onSuccess={this.responseGoogleSuccess}
               onFailure={this.responseGoogleError}
               isSignedIn={true}
