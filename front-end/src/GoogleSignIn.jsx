@@ -3,7 +3,8 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import './google.scss'
 import google_image from './images/google.svg';
 import axios from 'axios';
-const CLIENT_ID ; // assign the client id from our PRD
+const CLIENT_ID =
+  "593966806809-ul5hllgi74f5s83mf70e07c2se7ctjq6.apps.googleusercontent.com";
 let apiurl='http://localhost:8000';
 class GoogleSignIn extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class GoogleSignIn extends Component {
     return (
         <div>
           {this.state.isLoggedIn ? (
-            <button className="btn  btn-block">
+            <button className="btn  btn-block google-sign-in-btn">
 
               <GoogleLogout
                 clientId={CLIENT_ID}

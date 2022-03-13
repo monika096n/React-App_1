@@ -2,6 +2,14 @@
     margin: 0% !important;
     padding: 0% !important;
 }
+ul{
+    li{
+        width: 50%;
+        border: 3px solid black;
+        box-shadow: 3px 3px  #888888;
+
+    }
+}
 .loginImage{
    height:85%;
    width:100%; 
@@ -36,6 +44,10 @@
     border: 2px solid #2D4263;
     text-align: center;
     justify-content: center;
+    display: inline-block;
+    background-color: #2D4263;
+    color: #fff;
+
 }
 .col-1{
     width:100%;
@@ -60,7 +72,7 @@
 
 }
 .all-about-food{
-    color: #2D4263;
+    color: #fff;
     font-family: 'Cookie', cursive;
     font-style: normal;
     font-weight: 400;
@@ -69,7 +81,7 @@
     margin-bottom: 9%;
 }
 .food-desc{
-    color: #2D4263;
+    color: #fff;
     font-family: 'Cookie', cursive;
     font-style: normal;
     font-weight: 400;
@@ -80,28 +92,31 @@
 .heart-image{
     position: relative;
     top: -10px;
+    color: #fff !important;
+    height: 30px;
+    width: 30px;
 }
 h3{
    
     span{    
-        color: #2D4263;
+        color: #fff;
         line-height: 27px;
         font-size: 24px;
-        text-decoration: underline;
-        color: #2D4263;
         text-decoration: underline;
     }
 }
 .sign-active{
-    background-color: lightgray;
+    color: #fff;
+    background-color: #2D4263;
+    border-top: 3px solid #fff ;
 }
 
 .submit-btn{
-    color:#fff;
+    color:#2D4263;
     width: 100%;
     padding: 10px;
     margin: 20px;
-    background-color:#2D4263;
+    background-color:#fff;
 }
 
 @media  (max-width: 900px) {

@@ -85,9 +85,7 @@ export default class Register extends Component {
         let {text} = this.state;
         let active_sign_in=text==='Login'?true:false;
         return (
-         <div>
-            <Container>
-            <div className="border-login-top"></div>
+         <div style={{'backgroundColor':'#2D4263'}}>
                 <Row>
 
                     <Col md={8} xl={8} sm={0}>
@@ -99,19 +97,18 @@ export default class Register extends Component {
 
                     <form>
 
-                             <h3 className="all-about-food">All About Food <span> <img className="heart-image" src={heartsvg}></img></span></h3>   
+                             <h3 className="all-about-food">All About Food <span> <img className="heart-image" src={heartsvg} ></img></span></h3>   
                              <h3 className="food-desc"><span>Only for Food Lovers</span> - <span>Know Yummy Foods </span> - <span>Review Foods!</span> </h3>
                         <Row>
-                            <Col lg={6} sm={6}>
-                           <div className="login-signin signin-tab sign-active">
-                               <h3 onClick={()=>this.handleSigninEvent()}>Sign In</h3>
-                            </div>
-                            </Col>
-                            <Col lg={6} sm={6}>
-                            <div className="login-signin signup-tab">
-                            <h3 onClick = {()=>this.handleSignUpEvent()}>Sign Up</h3>
-                            </div>
-                            </Col>
+                            <ul>
+                                <li className="login-signin signin-tab sign-active nav-item">
+                                   <h6 style={{'padding':'10px'}} onClick={()=>this.handleSigninEvent()}>SignIn</h6>
+                                </li>
+                          
+                                <li className="login-signin signup-tab nav-item">
+                                   <h6 style={{'padding':'10px'}}   onClick = {()=>this.handleSignUpEvent()}>SignUp</h6>
+                                </li>
+                            </ul>
                         </Row>
  
                         {this.state.signin && !this.state.signup?<div>
@@ -139,7 +136,6 @@ export default class Register extends Component {
                     </Col>
 
                 </Row>
-            </Container>
             </div>
           
         );
