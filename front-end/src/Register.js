@@ -54,7 +54,7 @@ export default class Register extends Component {
     handleClick=(e)=>{
         let {signin}=this.state;
         e.preventDefault();
-        console.log('submited value',this.state)
+        console.log('submited value',this.state,signin)
         if(signin){
             let details={
                 username:this.state.username,
@@ -129,8 +129,10 @@ export default class Register extends Component {
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
                         </div></div>}
                         <button type="submit" className="btn  btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
-                        <p><span className='or-text'>OR</span></p>
-                         <GoogleSignIn/>
+                       
+                             <p><span className='or-text'>OR</span></p>
+                            <GoogleSignIn/>
+                       
                     </form>              
                     </div>
                     </Col>

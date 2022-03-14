@@ -109,6 +109,45 @@ let findUser=(username)=>{
   })
   })
 }
+
+app.get('/location-reviews/:location',((req,res)=>{
+    return new Promise((resolve,reject)=>{
+        let location=req.location;
+        db.collection('food_reviews').find({location:location}).toArray(function (
+            err,
+            info
+          ) {
+            if (info!=null){          
+                res.json({info})
+                resolve({info})
+            }
+            else{
+                res.json({status:'400',message:"Error While fetching food reviews"})
+                resolve({status:'400',message:"Error While fetching food reviews"})
+            }
+        })
+    })
+ 
+}))
+app.post('/food-review',((req,res)=>{
+    return new Promise((resolve,reject)=>{
+        let body=req.body;
+        db.collection('food_reviews').insertOne(body, function (
+            err,
+            info
+          ) {
+            if (info!=null){          
+                res.json({info})
+                resolve({info})
+            }
+            else{
+                res.json({status:'400',message:"Can't able to insert Food Review"})
+                resolve({status:'400',message:"Can't able to insert Food Review"})
+            }
+        }) 
+    })
+  
+}))
 app.post('/signUp', async (req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
@@ -135,6 +174,7 @@ app.post('/signUp', async (req,res)=>{
     
 })
 app.post('/login-with-password', (req,res)=>{
+    console.log('login -  with - password',req.body)
     let username = req.body.username;
     let password = req.body.password;
     db.collection('user_details')
