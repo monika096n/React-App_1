@@ -1,6 +1,6 @@
 .google-sign-in-btn{
    span{
-    color: #2D4263;
+    color: #02254A;
     font-family: 'Roboto';
     font-size: 16px;
    }
@@ -11,13 +11,18 @@
    button{
     background-color: #fff;
     box-shadow: none !important;
+    font-family: 'Salsa';
+    font-style: normal;
+    letter-spacing: 0.15em;
 
   }
 }
-.google-sign-in-btn{
-    width: 100%;
-    margin: 20px;
-    background-color: #fff;
-    border: 2px solid #2D4263;
 
+.google-sign-in-btn{
+    width: 90%;
+
+    background-color: #fff;
+    border: 2px solid #9C8220;
+    font-family: 'Salsa';
+    font-style: normal;
 }
