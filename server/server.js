@@ -110,10 +110,11 @@ let findUser=(username)=>{
   })
 }
 
-app.get('/location-reviews/:location',((req,res)=>{
+app.get('/location-reviews/:field_name/:value',((req,res)=>{
     return new Promise((resolve,reject)=>{
-        let location=req.location;
-        db.collection('food_reviews').find({location:location}).toArray(function (
+        let field_name=req.field_name;
+        let value=req.value;
+        db.collection('food_reviews').find({field_name:value}).toArray(function (
             err,
             info
           ) {
