@@ -153,11 +153,12 @@ app.post('/signUp', async (req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
     let fullname=req.body.fullname;
+    let Pincode=req.body.Pincode;
     let passwordHash = bcrypt.hashSync(password, 10);
     let existingUser=await findUser(username);
     console.log('login',existingUser)
     if(existingUser==='Not Exist'){
-        db.collection('user_details').insertOne({ username: username,password:passwordHash,fullname:fullname }, function (
+        db.collection('user_details').insertOne({ username: username,password:passwordHash,fullname:fullname,pincode:Pincode }, function (
             err,
             info
           ) {

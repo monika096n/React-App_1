@@ -17,10 +17,111 @@ export default class Register extends Component {
             username:'',
             password:'',
             fullname:'',
+            pincode:'',
             text:'Login',
+            errors:{},
 
         }
     }
+    validateForm() {
+        let fields={};
+       let {signin}=this.state;
+       let errors = {};
+       let formIsValid = true;
+        if(signin){
+            fields = {
+                password:this.state.password,
+                username:this.state.username,
+            };
+            if (!fields["username"]) {
+                formIsValid = false;
+                errors["username"] = "*Please enter your email-ID.";
+              }
+              
+            if (typeof fields["username"] !== "undefined") {
+              //regular expression for email validation
+              let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+              if (!pattern.test(fields["username"])) {
+                formIsValid = false;
+                errors["username"] = "*Please enter valid email-ID/username.";
+              }
+            }
+            if (!fields["password"]) {
+                formIsValid = false;
+                errors["password"] = "*Please enter your password.";
+              }
+        
+            
+      
+        }
+        else{
+        fields = {
+            password:this.state.password,
+            pincode:this.state.pincode,
+            username:this.state.username,
+            fullname:this.state.fullname,
+        };
+        if (!fields["fullname"]) {
+            formIsValid = false;
+            errors["fullname"] = "*Please enter your username.";
+          }
+    
+          if (typeof fields["fullname"] !== "undefined") {
+            if (!fields["fullname"].match(/^[a-zA-Z ]*$/)) {
+              formIsValid = false;
+              errors["fullname"] = "*Please enter alphabet characters only.";
+            }
+          }
+    
+          if (!fields["username"]) {
+            formIsValid = false;
+            errors["username"] = "*Please enter your email-ID.";
+          }
+          
+        if (typeof fields["username"] !== "undefined") {
+          //regular expression for email validation
+          let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+          if (!pattern.test(fields["username"])) {
+            formIsValid = false;
+            errors["username"] = "*Please enter valid email-ID/username.";
+          }
+        }
+  
+        if (!fields["pincode"]) {
+          formIsValid = false;
+          errors["pincode"] = "*Please enter pincode.";
+        }
+  
+        if (typeof fields["pincode"] !== "undefined") {
+          if (!fields["pincode"].match(/^[0-9]{6}$/)) {
+            formIsValid = false;
+            errors["pincode"] ="*Please enter pincode of length 6."
+          }
+      }
+      
+      if (!fields["password"]) {
+          formIsValid = false;
+          errors["password"] = "*Please enter your password.";
+        }
+  
+        if (typeof fields["password"] !== "undefined") {
+          if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+            formIsValid = false;
+            errors["password"] = "*Please enter secure and strong password.";
+          }
+        }
+        }
+
+      
+  
+      
+      this.setState({
+        errors: errors
+      });
+      return formIsValid;
+
+
+    }  
     handleSigninEvent(){
         if(!this.state.signin)
         {
@@ -54,31 +155,35 @@ export default class Register extends Component {
         let {signin}=this.state;
         e.preventDefault();
         console.log('submited value',this.state,signin)
-        if(signin){
-            let details={
-                username:this.state.username,
-                password:this.state.password
+        if(this.validateForm()){
+            if(signin){
+                let details={
+                    username:this.state.username,
+                    password:this.state.password
+                }
+                axios.post(apiurl+'/login-with-password',details).then((data)=>{   
+                    window.location.pathname='/homepage'
+                    console.log('Response from backend',data)
+                }).catch((e)=>{
+                    console.log('Error while posting login data',e)
+                })
             }
-            axios.post(apiurl+'/login-with-password',details).then((data)=>{   
-                window.location.pathname='/homepage'
-                console.log('Response from backend',data)
-            }).catch((e)=>{
-                console.log('Error while posting login data',e)
-            })
-        }
-        else{
-            let details={
-                username:this.state.username,
-                password:this.state.password,
-                fullname:this.state.fullname
+            else{
+                let details={
+                    username:this.state.username,
+                    password:this.state.password,
+                    fullname:this.state.fullname,
+                    pincode:this.state.pincode,
+                }
+                console.log('Register',details)
+                axios.post(apiurl+'/signUp',details).then((data)=>{
+                    console.log('Response from backend',data)
+                }).catch((e)=>{
+                    console.log('Error while posting login data',e)
+                })
             }
-            console.log('Register',details)
-            axios.post(apiurl+'/signUp',details).then((data)=>{
-                console.log('Response from backend',data)
-            }).catch((e)=>{
-                console.log('Error while posting login data',e)
-            })
         }
+      
     }
     render() {
         let {text} = this.state;
@@ -112,22 +217,33 @@ export default class Register extends Component {
                         {this.state.signin && !this.state.signup?<div>
                         <div className="form-group col-1">
                             <input type="email" className="form-control input-field" placeholder="Enter email" name='username' value={this.state.username} onChange={this.handleInputValue}/>
+                            <div className="form-errors">{this.state.errors.username}</div>
                         </div>
                         <div className="form-group col-1">
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue}/>
+                            <div className="form-errors">{this.state.errors.password}</div>
+
                         </div></div>:
                         <div>
                         <div className="form-group col-1">
                             <input type="text" className="form-control input-field" placeholder="Enter username"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
+                            <div className="form-errors">{this.state.errors.fullname}</div>
+
                         </div>
                         <div className="form-group col-1">
                             <input type="email" className="form-control input-field" placeholder="Enter email"  name='username' value={this.state.username} onChange={this.handleInputValue}/>
+                            <div className="form-errors">{this.state.errors.username}</div>
+
                         </div>
                         <div className="form-group col-1">
                             <input type="password" className="form-control input-field" placeholder="Enter password" name='password' value={this.state.password} onChange={this.handleInputValue} />
+                            <div className="form-errors">{this.state.errors.password}</div>
+
                         </div>
                         <div className="form-group col-1">
-                            <input type="text" className="form-control input-field" placeholder="Enter pincode"  name='pincode'  />
+                            <input type="text" className="form-control input-field" placeholder="Enter pincode"  name='pincode' value={this.state.pincode} onChange={this.handleInputValue}  />
+                            <div className="form-errors">{this.state.errors.pincode}</div>
+
                         </div>
                         </div>}
                         <button type="submit" className="btn  btn-block submit-btn" onClick = {this.handleClick}>{text}</button>
