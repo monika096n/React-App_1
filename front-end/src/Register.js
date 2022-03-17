@@ -103,13 +103,6 @@ export default class Register extends Component {
           formIsValid = false;
           errors["password"] = "*Please enter your password.";
         }
-  
-        if (typeof fields["password"] !== "undefined") {
-          if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-            formIsValid = false;
-            errors["password"] = "*Please enter secure and strong password.";
-          }
-        }
         }
 
       
@@ -128,6 +121,7 @@ export default class Register extends Component {
             this.setState({ signin: !this.state.signin  });
             this.setState({ signup: !this.state.signup });
             this.setState({username:'',password:'',fullname:'',text:'Login'})
+            this.setState({errors:{}})
         }
 
         $('.signup-tab').removeClass('sign-active')
@@ -142,6 +136,7 @@ export default class Register extends Component {
             this.setState({ signin: !this.state.signin});
             this.setState({ signup: !this.state.signup });
             this.setState({username:'',password:'',fullname:'',text:'Register' })
+            this.setState({errors:{}})
         }
        
 
@@ -162,7 +157,15 @@ export default class Register extends Component {
                     password:this.state.password
                 }
                 axios.post(apiurl+'/login-with-password',details).then((data)=>{   
-                    window.location.pathname='/homepage'
+                    if(data.status===true)
+                    {
+                        window.location.pathname='/homepage'
+                    }
+                    else{
+                        let errors={}
+                        errors["login_failed"] = "Please enter valid email-ID/Password";
+                        this.setState({errors:errors})
+                    }
                     console.log('Response from backend',data)
                 }).catch((e)=>{
                     console.log('Error while posting login data',e)
@@ -178,6 +181,14 @@ export default class Register extends Component {
                 console.log('Register',details)
                 axios.post(apiurl+'/signUp',details).then((data)=>{
                     console.log('Response from backend',data)
+                    if(data.isValid===true){
+                        window.location.pathname='/homepage'
+                    }
+                    else{
+                        let errors={}
+                        errors["login_failed"] = data.data.message;
+                        this.setState({errors:errors})
+                    }
                 }).catch((e)=>{
                     console.log('Error while posting login data',e)
                 })
@@ -215,6 +226,7 @@ export default class Register extends Component {
                         </Row>
  
                         {this.state.signin && !this.state.signup?<div>
+                            <div className="form-errors">{this.state.errors.login_failed}</div>
                         <div className="form-group col-1">
                             <input type="email" className="form-control input-field" placeholder="Enter email" name='username' value={this.state.username} onChange={this.handleInputValue}/>
                             <div className="form-errors">{this.state.errors.username}</div>
@@ -225,6 +237,7 @@ export default class Register extends Component {
 
                         </div></div>:
                         <div>
+                            <div className="form-errors">{this.state.errors.login_failed}</div>
                         <div className="form-group col-1">
                             <input type="text" className="form-control input-field" placeholder="Enter username"  name='fullname' value={this.state.fullname} onChange={this.handleInputValue}/>
                             <div className="form-errors">{this.state.errors.fullname}</div>

@@ -156,22 +156,21 @@ app.post('/signUp', async (req,res)=>{
     let Pincode=req.body.Pincode;
     let passwordHash = bcrypt.hashSync(password, 10);
     let existingUser=await findUser(username);
-    console.log('login',existingUser)
     if(existingUser==='Not Exist'){
         db.collection('user_details').insertOne({ username: username,password:passwordHash,fullname:fullname,pincode:Pincode }, function (
             err,
             info
           ) {
             if (info!=null){     
-                res.json({info})
+                res.json({status:'200',isValid:true,message:"User Registered"})
             }
             else{
-                res.json({status:'400',message:"Can't able to register"})
+                res.json({status:'400',message:"Server Unavailable"})
             }
         }) 
     }
     else{
-        res.json({status:'400',message:"User Already Exist!"})
+        res.json({status:'400',isValid:false,message:"User Already Exist!"})
     }
     
 })
@@ -187,7 +186,7 @@ app.post('/login-with-password', (req,res)=>{
             res.json({status:verified})
         }
         else{
-            res.json({status:'400',message:'User not registered'})
+            res.json({status:false,message:'User not registered'})
         }
         
     })
