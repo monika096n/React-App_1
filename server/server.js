@@ -183,7 +183,15 @@ app.post('/login-with-password', (req,res)=>{
         if (result!=null){
             let resultPassword = result.password;
             let verified = bcrypt.compareSync(password, resultPassword);
-            res.json({status:verified})
+            console.log(verified)
+            if(verified==true)
+            {
+                res.json({status:verified,result:true})
+            }
+            else{
+                res.json({status:verified,result:false})
+            }
+            
         }
         else{
             res.json({status:false,message:'User not registered'})

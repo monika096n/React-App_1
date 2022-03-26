@@ -1,6 +1,6 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Register from './Register';
+import RegisterContainer from './containers/RegisterContainer';
 import HomePage from './HomePage';
 import {
   BrowserRouter,
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<RegisterContainer />} />
           <Route path="/homepage" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
