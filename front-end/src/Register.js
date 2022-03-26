@@ -24,8 +24,8 @@ export default class Register extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-        let { isLogin } = this.props;
-        if (isLogin == true) {
+        let { isLogin,isRegistered } = this.props;
+        if (isLogin|| isRegistered) {
             window.location.pathname = '/homepage'
         }
     }
@@ -152,10 +152,8 @@ export default class Register extends Component {
 
     handleClick = (e) => {
         let { signin } = this.state;
-        let { loginWithPassword, RegisterWithPassword, isLogin } = this.props;
-        console.log("Login Props", isLogin)
+        let { loginWithPassword, isLogin ,isRegistered,RegisterWithPasswordFunction} = this.props;
         e.preventDefault();
-        console.log('submited value', this.state, signin)
         if (this.validateForm()) {
             if (signin) {
                 let details = {
@@ -177,20 +175,16 @@ export default class Register extends Component {
                     fullname: this.state.fullname,
                     pincode: this.state.pincode,
                 }
-                console.log('Register', details)
-                axios.post(apiurl + '/signUp', details).then((data) => {
-                    console.log('Response from backend', data)
-                    if (data.isValid === true) {
-                        window.location.pathname = '/homepage'
-                    }
-                    else {
+                  
+                  RegisterWithPasswordFunction(details)
+                
+                    if(!isRegistered)
+                     {
                         let errors = {}
-                        errors["login_failed"] = data.data.message;
+                        errors["login_failed"] = 'Register Failed';
                         this.setState({ errors: errors })
                     }
-                }).catch((e) => {
-                    console.log('Error while posting login data', e)
-                })
+                
             }
         }
 

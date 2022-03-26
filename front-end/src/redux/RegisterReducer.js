@@ -1,6 +1,5 @@
-import {LoginFailed,LoginSet,LoginSuccess } from './RegisterActionTypes';
+import {LoginFailed,LoginSet,LoginSuccess ,RegisterWithPassword} from './RegisterActionTypes';
 const RegisterReducer = (state = [], action) => {
-  console.log("fnjkfgjksnfdjcknnjsdnnkjsn")
   console.log(action)
   switch(action.type) {
     case LoginSet:
@@ -15,6 +14,10 @@ const RegisterReducer = (state = [], action) => {
       return Object.assign({}, state, {
         isLogin:false
       });
+    case RegisterWithPassword:
+      return Object.assign({},state,{
+        RegisterWithPassword:action.data
+      })
     default:
       return state;
   }

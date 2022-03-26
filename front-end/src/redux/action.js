@@ -1,4 +1,4 @@
-import { apiurl } from './RegisterActionTypes';
+import { apiurl ,RegisterWithPassword} from './RegisterActionTypes';
 import axios from "axios";
 const LoginSuccess = (data) => {
     console.log("looginwucnnfjn")
@@ -30,4 +30,24 @@ export function loginWithPassword(details) {
             })
         ).catch(() => dispatch(LoginFailed()))
     };
+}
+
+export function RegisterWithPasswordFunction(details) {
+  return function(dispatch){
+     return axios.post(apiurl + '/signUp', details).then((data) => {
+        console.log('Response from backend', data)
+        dispatch({
+            type: RegisterWithPassword,
+            data:data.data.isValid
+        })
+      
+    }).catch((e) => {
+        dispatch({
+            type: RegisterWithPassword,
+            data:false
+        })
+        console.log('Error while posting login data', e)
+    })
+   }
+
 }

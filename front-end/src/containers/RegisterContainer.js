@@ -1,21 +1,22 @@
 import { connect } from "react-redux"
 import Register from '../Register'
-import {loginWithPassword} from '../redux/action'
+import {loginWithPassword,RegisterWithPasswordFunction} from '../redux/action'
 
 const mapStateToProps = state => {
   console.log(state)
   return {
-    isLogin: state.RegisterReducer.isLogin
+    isLogin: state.RegisterReducer.isLogin,
+    isRegistered:state.RegisterReducer.RegisterWithPassword
   }
 }
 const mapDispatchToProps =  (dispatch) => {
   return {
-    loginWithPassword: (details) => dispatch(loginWithPassword(details))
-    // RegisterWithPassword : (details) => dispatch(RegisterWithPassword(details))
+    loginWithPassword: (details) => dispatch(loginWithPassword(details)),
+    RegisterWithPasswordFunction : (details) => dispatch(RegisterWithPasswordFunction(details))
   }
 }
 const RegisterContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(Register);
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
+export default (RegisterContainer)
